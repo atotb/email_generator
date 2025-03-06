@@ -1,5 +1,4 @@
 import React from "react";
-import { send } from "vite";
 
 interface FormResponseProps {
   subject: string;
@@ -19,6 +18,8 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
     "molly.cook@senate.texas.gov",
     "Christina.morales@house.texas.gov",
   ];
+  let encodedSubject = encodeURIComponent(emailSubject);
+  let encodedBody = encodeURIComponent(emailBody);
   return (
     <div className=" flex flex-col w-full items-center  px-10 py-10 space-y-10 lg:w-3/4 ">
       <h2 className="font-bold text-2xl">Your Email is Ready</h2>
@@ -26,7 +27,6 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
         Thanks for taking steps to contact our city officials. We generated a
         unique email for you to send directly to relevant stakeholders.
       </p>
-
       <div className="flex flex-col space-y-2">
         <h3 className="font-bold text-xl text-left">To:</h3>
         <div className="flex flex-wrap space-x-2">
@@ -37,7 +37,6 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
           ))}
         </div>
       </div>
-
       <h3 className="w-full font-bold text-xl text-left">Subject:</h3>
       <input
         className="input w-full"
@@ -58,7 +57,41 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
           setEmailBody(e.target.value);
         }}
       ></textarea>
-      <button className="btn my-10">Send Now</button>
+      <div className="w-full flex flex-col space-y-5 items-start md:flex-row md:justify-between md:space-y-0">
+        <div>
+          <span>I'm on the computer</span>
+          <a
+            href={
+              "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+              sendToEmails +
+              "&su=" +
+              encodedSubject +
+              "&body=" +
+              encodedBody
+            }
+            className="btn btn-wide"
+          >
+            Gmail on Web
+          </a>
+        </div>
+
+        <div>
+          <span>I'm on my phone</span>
+          <a
+            href={
+              "mailto:" +
+              sendToEmails +
+              "&subject=" +
+              encodedSubject +
+              "&body=" +
+              encodedBody
+            }
+            className="btn btn-wide"
+          >
+            iPhone
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

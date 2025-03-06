@@ -13,7 +13,6 @@ const Form = () => {
     closuresSelection,
     handleClosureChange,
     neighborhood,
-    setNeighborhood,
     otherComments,
     setOtherComments,
     trailUsagesSelection,
@@ -26,6 +25,15 @@ const Form = () => {
     setEmailBody,
     submitted,
     setSubmitted,
+    closureError,
+    setClosureError,
+    usageError,
+    setUsageError,
+    formSubmissionError,
+    setFormSubmissionError,
+    neighborhoodError,
+    setneighborhoodError,
+    handleNeighborhoodChange,
   } = useFormLogic();
   const trailUsages = [
     "I use it to go to work",
@@ -75,6 +83,19 @@ const Form = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (closuresSelection.length === 0) {
+      setClosureError("Please select at least one trail closure");
+    }
+    if (trailUsagesSelection.length === 0) {
+      setUsageError("Please select at least one trail usage");
+    }
+    if (!neighborhood) {
+      setneighborhoodError("Please select a neighborhood.");
+      return;
+    }
+    if (closuresSelection.length === 0 || trailUsagesSelection.length === 0) {
+      return;
+    }
     if (isLoading) return;
     setIsLoading(true);
 
@@ -106,6 +127,11 @@ const Form = () => {
       // console.log("Form Data:", formData);
       const notionData = await createNotionPage(formData);
       console.log("Notion Data:", notionData);
+      if (!notionData.id) {
+        setFormSubmissionError("Make sure Form is filled out correctly.");
+        setIsLoading(false);
+        return;
+      }
       if (notionData) {
         console.log("Notion table ID:", notionData.id);
         const webhookResponse = await sendWebhook(notionData, formData);
@@ -130,6 +156,24 @@ const Form = () => {
           <h1 className="text-4xl text-center font-bold">
             Fill Form to Generate Personalized Email
           </h1>
+          {formSubmissionError && (
+            <div role="alert" className="alert alert-error">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 shrink-0 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>{formSubmissionError}</span>
+            </div>
+          )}
           <form
             className="flex flex-col space-y-4 w-full max-w-lg"
             onSubmit={handleSubmit}
@@ -174,8 +218,27 @@ const Form = () => {
                     {closure.name}
                   </label>
                 ))}
+                {closureError && (
+                  <div role="alert" className="alert alert-warning">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 shrink-0 stroke-current"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      />
+                    </svg>
+                    <span>{closureError}</span>
+                  </div>
+                )}
               </div>
             </div>
+
             <div className="flex flex-col space-y-2">
               <h3 className="font-bold text-xl">How do you use the trail?</h3>
               {trailUsages.map((usage, i) => (
@@ -190,6 +253,24 @@ const Form = () => {
                   {usage}
                 </label>
               ))}
+              {usageError && (
+                <div role="alert" className="alert alert-warning">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 shrink-0 stroke-current"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                  </svg>
+                  <span>{usageError}</span>
+                </div>
+              )}
             </div>
 
             <div className="flex flex-col space-y-2">
@@ -203,11 +284,29 @@ const Form = () => {
                     type="radio"
                     name="neighborhood"
                     value={neighborhood}
-                    onChange={(e) => setNeighborhood(e.target.value)}
+                    onChange={(e) => handleNeighborhoodChange(e.target.value)}
                   />
                   {neighborhood}
                 </label>
               ))}
+              {neighborhoodError && (
+                <div role="alert" className="alert alert-warning">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 shrink-0 stroke-current"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                    />
+                  </svg>
+                  <span>{neighborhoodError}</span>
+                </div>
+              )}
             </div>
 
             <h3 className="font-bold text-xl">
