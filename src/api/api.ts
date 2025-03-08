@@ -10,7 +10,7 @@ export async function createNotionPage(data: any): Promise<ApiResponse> {
   try {
     // https://atotb.org/personalized-emails/notion-proxy.php
     const response = await axios.post(
-      "https://personalized-email.vercel.app/api/v1/pages",
+      "https://api.notion.com/v1/pages",
       {
         parent: {
           database_id: import.meta.env.VITE_REACT_APP_NOTION_DATABASE_ID,
