@@ -7,7 +7,7 @@ import path from "path";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
-    outDir: "../build", // Save files in the plugin folder
+    outDir: "./build", // Save files in the plugin folder
     emptyOutDir: true,
     rollupOptions: {
       input: path.resolve(__dirname, "index.html"),

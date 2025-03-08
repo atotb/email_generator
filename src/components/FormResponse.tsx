@@ -1,10 +1,14 @@
 import React from "react";
+import { useEffect } from "react";
 
 interface FormResponseProps {
   subject: string;
   body: string;
 }
 const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when the component mounts
+  }, []);
   const [emailSubject, setEmailSubject] = React.useState(subject);
   const [emailBody, setEmailBody] = React.useState(body);
   const sendToEmails = [

@@ -8,8 +8,9 @@ interface ApiResponse {
 }
 export async function createNotionPage(data: any): Promise<ApiResponse> {
   try {
+    // https://atotb.org/personalized-emails/notion-proxy.php
     const response = await axios.post(
-      "/api/v1/pages",
+      "api/v1/pages",
       {
         parent: {
           database_id: import.meta.env.VITE_REACT_APP_NOTION_DATABASE_ID,
@@ -81,31 +82,3 @@ export async function sendWebhook(
     return { response: null };
   }
 }
-
-// {
-//             Name: {
-//               title: [{ text: { content: name } }],
-//             },
-//             Email: {
-//               email: data.email,
-//             },
-
-//             "Active Trail Closure in Plain Text": {
-//               multi_select: data.closuresSelection.map((closure: any) => ({
-//                 name: closure, // Assuming closuresSelection is an array of strings.
-//               })),
-//             },
-//             "How do you use the trail?": {
-//               multi_select: data.trailUsagesSelection.map((usage: any) => ({
-//                 name: usage, // Assuming trailUsagesSelection is an array of strings.
-//               })),
-//             },
-//             "Which neighborhood do you live in?": {
-//               // Fixing the neighborhood field to match the multi_select format
-//               multi_select: [
-//                 { name: data.neighborhood }, // neighborhood should be wrapped in an object with `name` key
-//               ],
-//             },
-//             "Anything else you want to mention?": {
-//               rich_text: [{ text: { content: data.otherComments } }],
-//             },
