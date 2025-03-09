@@ -8,8 +8,10 @@ interface ApiResponse {
 }
 export async function createNotionPage(data: any): Promise<ApiResponse> {
   try {
-    const response = await axios.post("/api/notion", data); // Use secure API route
+    const response = await axios.post("/api/notion", data);
     console.log("Page Created:", response.data);
+    // console.log("Page Created:", response.data.id);
+
     return { response: response.data, id: response.data.id };
   } catch (error) {
     if (axios.isAxiosError(error)) {

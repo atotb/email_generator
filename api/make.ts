@@ -12,7 +12,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!notionDatabaseId) {
       return res.status(500).json({ error: "Missing Database ID" });
     }
-    if (!req.body.id) {
+    if (!req.body.notionData.id) {
       return res.status(400).json({ error: "Missing ID" });
     }
 
