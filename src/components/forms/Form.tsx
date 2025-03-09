@@ -134,7 +134,10 @@ const Form = () => {
       }
       if (notionData) {
         console.log("Notion table ID:", notionData.id);
-        const webhookResponse = await sendWebhook(notionData, formData);
+        const webhookResponse = await sendWebhook({
+          notionData: notionData,
+          formData: formData,
+        });
         console.log("webhook response data:", webhookResponse.response.data);
 
         setEmailSubject(webhookResponse.response.subject);
