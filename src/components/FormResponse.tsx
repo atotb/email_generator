@@ -24,21 +24,9 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
     "Christina.morales@house.texas.gov",
   ];
   let encodedSubject = encodeURIComponent(emailSubject);
-  let encodedBody = encodeURIComponent(emailBody);
-  let emailLink =
-    "mailto:" +
-    sendToEmails +
-    "?subject=" +
-    encodedSubject +
-    "&body=" +
-    encodedBody;
-  let gmailLink =
-    "https://mail.google.com/mail/?view=cm&fs=1&to=" +
-    sendToEmails +
-    "&su=" +
-    encodedSubject +
-    "&body=" +
-    encodedBody;
+  let encodedBody = encodeURIComponent(emailBody.replace(/\n/g, "\r\n"));
+  let emailLink = `mailto:${sendToEmails}?subject=${encodedSubject}&body=${encodedBody}`;
+  let gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${sendToEmails}&su=${encodedSubject}&body=${encodedBody}`;
 
   console.log("Gmail Link: ", gmailLink);
   console.log("Iphone Email Link: ", emailLink);
@@ -83,14 +71,14 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
       <div className="w-full flex flex-col space-y-5 items-start md:flex-row md:justify-between md:space-y-0">
         <div>
           <span>I'm on the computer</span>
-          <a href={gmailLink} className="btn btn-wide">
+          <a href={gmailLink} target="_blank" className="btn btn-wide">
             Gmail on Web
           </a>
         </div>
 
         <div>
           <span>I'm on my phone</span>
-          <a href={emailLink} className="btn btn-wide">
+          <a href={emailLink} target="_blank" className="btn btn-wide">
             iPhone
           </a>
         </div>
