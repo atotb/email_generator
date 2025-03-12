@@ -323,7 +323,11 @@ const Form = () => {
             ></textarea>
             <button type="submit" className="btn my-10" disabled={isLoading}>
               {isLoading ? (
-                <span className="loading loading-infinity loading-lg"></span>
+                <img
+                  src="/spinner.gif"
+                  alt="Loading..."
+                  className="w-16 h-16"
+                />
               ) : (
                 "Send Now"
               )}

@@ -7,10 +7,14 @@ interface FormResponseProps {
 }
 const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top when the component mounts
+    window.scrollTo({ top: 0, behavior: "auto" }); // Scroll to top when the component mounts
+    document.body.style.zoom = "100%"; // Ensure default zoom
   }, []);
   const [emailSubject, setEmailSubject] = React.useState(subject);
   const [emailBody, setEmailBody] = React.useState(body);
+  const [emailLink, setEmailLink] = React.useState("");
+  const [gmailLink, setGmailLink] = React.useState("");
+
   const sendToEmails = [
     "HOU-PIOWebMail@txdot.gov",
     "info@houstonparksboard.org",
@@ -24,6 +28,10 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
   ];
   let encodedSubject = encodeURIComponent(emailSubject);
   let encodedBody = encodeURIComponent(emailBody);
+
+  console.log("Gmail Link: ", gmailLink);
+  console.log("Iphone Email Link: ", emailLink);
+
   return (
     <div className=" flex flex-col w-full items-center  px-10 py-10 space-y-10 lg:w-3/4 ">
       <h2 className="font-bold text-2xl">Your Email is Ready</h2>
@@ -65,15 +73,18 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
         <div>
           <span>I'm on the computer</span>
           <a
-            href={
-              "https://mail.google.com/mail/?view=cm&fs=1&to=" +
-              sendToEmails +
-              "&su=" +
-              encodedSubject +
-              "&body=" +
-              encodedBody
-            }
+            href={gmailLink}
             className="btn btn-wide"
+            onClick={() => {
+              setGmailLink(
+                "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+                  sendToEmails +
+                  "&su=" +
+                  encodedSubject +
+                  "&body=" +
+                  encodedBody
+              );
+            }}
           >
             Gmail on Web
           </a>
@@ -82,15 +93,18 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
         <div>
           <span>I'm on my phone</span>
           <a
-            href={
-              "mailto:" +
-              sendToEmails +
-              "&subject=" +
-              encodedSubject +
-              "&body=" +
-              encodedBody
-            }
+            href={emailLink}
             className="btn btn-wide"
+            onClick={() => {
+              setEmailLink(
+                "mailto:" +
+                  sendToEmails +
+                  "&subject=" +
+                  encodedSubject +
+                  "&body=" +
+                  encodedBody
+              );
+            }}
           >
             iPhone
           </a>
