@@ -17,7 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const notionResponse = await axios.post(
-      "https://hook.us2.make.com/58vrk8csvbl56m6qj3imfl5kfbdie016",
+      "https://hook.us2.make.com/4821yctxfb9t49lw11eqicr130mwihr9",
       {
         data: {
           id: req.body.notionData.id,
