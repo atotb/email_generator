@@ -57,27 +57,27 @@ const Form = () => {
   const activeTrailClosures = [
     {
       name: "MKT Studewood Bridge",
-      description: "White Oak Bayou Under Studewood Bridge",
+      description: "White Oak Bayou Under Studewood Bridge", // not using descriptions right now
     },
     {
       name: "MKT Hogan Bridge",
-      description: "White Oak Bayou Under Hogan Bridge",
+      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
     },
     {
       name: "White Oak Bayou Under Hogan Bridge",
-      description: "White Oak Bayou Under Hogan Bridge",
+      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
     },
     {
       name: "White Oak Bayou at Studemont due to I-10 Construction",
-      description: "White Oak Bayou Under Hogan Bridge",
+      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
     },
     {
       name: "Houston Avenue Bridge Over I-10",
-      description: "White Oak Bayou Under Hogan Bridge",
+      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
     },
     {
       name: "White Oak Bayou Yale/Heights due to North Canal Construction",
-      description: "White Oak Bayou Under Hogan Bridge",
+      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
     },
   ];
 
