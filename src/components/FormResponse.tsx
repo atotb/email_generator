@@ -25,8 +25,7 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
     "Christina.morales@house.texas.gov",
   ];
   let encodedSubject = encodeURIComponent(emailSubject);
-  let encodedBody = encodeURIComponent(d?.replace(/\n/g, "\r\n") || ""); 
-//  let encodedBody = encodeURIComponent(emailBody.replace(/\n/g, "\r\n"));
+  let encodedBody = encodeURIComponent(emailBody.replace(/\n/g, "\r\n"));
   let emailLink = `mailto:${sendToEmails}?subject=${encodedSubject}&body=${encodedBody}`;
   let gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${sendToEmails}&su=${encodedSubject}&body=${encodedBody}`;
 
