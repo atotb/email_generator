@@ -16,6 +16,7 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
     "HOU-PIOWebMail@txdot.gov",
     "info@houstonparksboard.org",
     "districtc@houstontx.gov",
+    "districth@houstontx.gov",
     "mayor@houstontx.gov",
     "publicworks@houstontx.gov",
     "info@bikehouston.org",
