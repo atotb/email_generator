@@ -8,7 +8,7 @@ interface FormResponseProps {
 const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" }); // Scroll to top when the component mounts
-    document.body.style.zoom = "100%"; // Ensure default zoom
+    document.body.style.zoom = "1";
   }, []);
   const [emailSubject, setEmailSubject] = React.useState(subject);
   const [emailBody, setEmailBody] = React.useState(body);
@@ -25,22 +25,20 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
   ];
   let encodedSubject = encodeURIComponent(emailSubject);
   let encodedBody = encodeURIComponent(emailBody);
-  const [emailLink, setEmailLink] = React.useState(
+  let emailLink =
     "mailto:" +
-      sendToEmails +
-      "&subject=" +
-      encodedSubject +
-      "&body=" +
-      encodedBody
-  );
-  const [gmailLink, setGmailLink] = React.useState(
+    sendToEmails +
+    "?subject=" +
+    encodedSubject +
+    "&body=" +
+    encodedBody;
+  let gmailLink =
     "https://mail.google.com/mail/?view=cm&fs=1&to=" +
-      sendToEmails +
-      "&su=" +
-      encodedSubject +
-      "&body=" +
-      encodedBody
-  );
+    sendToEmails +
+    "&su=" +
+    encodedSubject +
+    "&body=" +
+    encodedBody;
 
   console.log("Gmail Link: ", gmailLink);
   console.log("Iphone Email Link: ", emailLink);
@@ -71,22 +69,6 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
         value={emailSubject}
         onChange={(e) => {
           setEmailSubject(e.target.value);
-          setGmailLink(
-            "https://mail.google.com/mail/?view=cm&fs=1&to=" +
-              sendToEmails +
-              "&su=" +
-              encodedSubject +
-              "&body=" +
-              encodedBody
-          );
-          setEmailLink(
-            "mailto:" +
-              sendToEmails +
-              "&subject=" +
-              encodedSubject +
-              "&body=" +
-              encodedBody
-          );
         }}
       />
       <h3 className="w-full font-bold text-xl text-left">Body:</h3>
@@ -96,22 +78,6 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
         value={emailBody}
         onChange={(e) => {
           setEmailBody(e.target.value);
-          setGmailLink(
-            "https://mail.google.com/mail/?view=cm&fs=1&to=" +
-              sendToEmails +
-              "&su=" +
-              encodedSubject +
-              "&body=" +
-              encodedBody
-          );
-          setEmailLink(
-            "mailto:" +
-              sendToEmails +
-              "&subject=" +
-              encodedSubject +
-              "&body=" +
-              encodedBody
-          );
         }}
       ></textarea>
       <div className="w-full flex flex-col space-y-5 items-start md:flex-row md:justify-between md:space-y-0">
