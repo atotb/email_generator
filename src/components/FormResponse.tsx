@@ -12,9 +12,6 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
   }, []);
   const [emailSubject, setEmailSubject] = React.useState(subject);
   const [emailBody, setEmailBody] = React.useState(body);
-  const [emailLink, setEmailLink] = React.useState("");
-  const [gmailLink, setGmailLink] = React.useState("");
-
   const sendToEmails = [
     "HOU-PIOWebMail@txdot.gov",
     "info@houstonparksboard.org",
@@ -28,6 +25,22 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
   ];
   let encodedSubject = encodeURIComponent(emailSubject);
   let encodedBody = encodeURIComponent(emailBody);
+  const [emailLink, setEmailLink] = React.useState(
+    "mailto:" +
+      sendToEmails +
+      "&subject=" +
+      encodedSubject +
+      "&body=" +
+      encodedBody
+  );
+  const [gmailLink, setGmailLink] = React.useState(
+    "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+      sendToEmails +
+      "&su=" +
+      encodedSubject +
+      "&body=" +
+      encodedBody
+  );
 
   console.log("Gmail Link: ", gmailLink);
   console.log("Iphone Email Link: ", emailLink);
@@ -58,6 +71,22 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
         value={emailSubject}
         onChange={(e) => {
           setEmailSubject(e.target.value);
+          setGmailLink(
+            "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+              sendToEmails +
+              "&su=" +
+              encodedSubject +
+              "&body=" +
+              encodedBody
+          );
+          setEmailLink(
+            "mailto:" +
+              sendToEmails +
+              "&subject=" +
+              encodedSubject +
+              "&body=" +
+              encodedBody
+          );
         }}
       />
       <h3 className="w-full font-bold text-xl text-left">Body:</h3>
@@ -67,45 +96,35 @@ const FormResponse: React.FC<FormResponseProps> = ({ subject, body }) => {
         value={emailBody}
         onChange={(e) => {
           setEmailBody(e.target.value);
+          setGmailLink(
+            "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+              sendToEmails +
+              "&su=" +
+              encodedSubject +
+              "&body=" +
+              encodedBody
+          );
+          setEmailLink(
+            "mailto:" +
+              sendToEmails +
+              "&subject=" +
+              encodedSubject +
+              "&body=" +
+              encodedBody
+          );
         }}
       ></textarea>
       <div className="w-full flex flex-col space-y-5 items-start md:flex-row md:justify-between md:space-y-0">
         <div>
           <span>I'm on the computer</span>
-          <a
-            href={gmailLink}
-            className="btn btn-wide"
-            onClick={() => {
-              setGmailLink(
-                "https://mail.google.com/mail/?view=cm&fs=1&to=" +
-                  sendToEmails +
-                  "&su=" +
-                  encodedSubject +
-                  "&body=" +
-                  encodedBody
-              );
-            }}
-          >
+          <a href={gmailLink} className="btn btn-wide">
             Gmail on Web
           </a>
         </div>
 
         <div>
           <span>I'm on my phone</span>
-          <a
-            href={emailLink}
-            className="btn btn-wide"
-            onClick={() => {
-              setEmailLink(
-                "mailto:" +
-                  sendToEmails +
-                  "&subject=" +
-                  encodedSubject +
-                  "&body=" +
-                  encodedBody
-              );
-            }}
-          >
+          <a href={emailLink} className="btn btn-wide">
             iPhone
           </a>
         </div>
