@@ -57,27 +57,27 @@ const Form = () => {
   const activeTrailClosures = [
     {
       name: "MKT Studewood Bridge",
-      description: "White Oak Bayou Under Studewood Bridge", // not using descriptions right now
+      description: "White Oak Bayou Under Studewood Bridge",
     },
     {
       name: "MKT Hogan Bridge",
-      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
+      description: "White Oak Bayou Under Hogan Bridge",
     },
     {
       name: "White Oak Bayou Under Hogan Bridge",
-      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
+      description: "White Oak Bayou Under Hogan Bridge",
     },
     {
       name: "White Oak Bayou at Studemont due to I-10 Construction",
-      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
+      description: "White Oak Bayou Under Hogan Bridge",
     },
     {
       name: "Houston Avenue Bridge Over I-10",
-      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
+      description: "White Oak Bayou Under Hogan Bridge",
     },
     {
       name: "White Oak Bayou Yale/Heights due to North Canal Construction",
-      description: "White Oak Bayou Under Hogan Bridge", // not using descriptions right now
+      description: "White Oak Bayou Under Hogan Bridge",
     },
   ];
 
@@ -181,11 +181,11 @@ const Form = () => {
             className="flex flex-col space-y-4 w-full max-w-lg"
             onSubmit={handleSubmit}
           >
-            <label htmlFor="" className="font-bold text-xl">
+            <label htmlFor="" className="font-bold text-xl ">
               Name:
               <input
                 required
-                className="input w-full"
+                className="input input-secondary text-secondary dark:text-primary  w-full"
                 type="text"
                 placeholder="John Doe"
                 value={name}
@@ -196,7 +196,7 @@ const Form = () => {
               Email:
               <input
                 required
-                className="input w-full"
+                className="input input-secondary text-secondary dark:text-primary w-full"
                 type="text"
                 placeholder="john@gmail.com"
                 value={email}
@@ -212,7 +212,7 @@ const Form = () => {
                 {activeTrailClosures.map((closure, i) => (
                   <label className="" key={`closure-${i}`}>
                     <input
-                      className="checkbox mr-2"
+                      className="checkbox checkbox-secondary mr-2"
                       type="checkbox"
                       name="trailClosures"
                       value={closure.name}
@@ -247,7 +247,7 @@ const Form = () => {
               {trailUsages.map((usage, i) => (
                 <label className="" key={`usage-${i}`}>
                   <input
-                    className="checkbox mr-2"
+                    className="checkbox checkbox-secondary mr-2"
                     type="checkbox"
                     name="trailUsage"
                     value={usage}
@@ -283,7 +283,7 @@ const Form = () => {
               {neighborhoods.map((neighborhood, i) => (
                 <label className="" key={`neighborhood-${i}`}>
                   <input
-                    className="radio mr-2"
+                    className="radio radio-secondary mr-2"
                     type="radio"
                     name="neighborhood"
                     value={neighborhood}
@@ -316,12 +316,16 @@ const Form = () => {
               Anything else you want to mention?
             </h3>
             <textarea
-              className="textarea w-full h-32"
+              className="textarea textarea-secondary text-secondary font-bold dark:text-primary w-full h-32"
               placeholder="Additional Comments"
               value={otherComments}
               onChange={(e) => setOtherComments(e.target.value)}
             ></textarea>
-            <button type="submit" className="btn my-10" disabled={isLoading}>
+            <button
+              type="submit"
+              className="btn btn-secondary my-10"
+              disabled={isLoading}
+            >
               {isLoading ? (
                 <span className="loading loading-infinity loading-lg"></span>
               ) : (
